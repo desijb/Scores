@@ -6,6 +6,6 @@ node {
 
   stage("Build project without test execution") {
 	print 'Building...'
-    sh "mvn -Dmaven.test.skip=true  package"
+    sh "/var/jenkins_home/maven/bin/mvn clean install -DskipTests"
   }
 }

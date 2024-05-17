@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>net.sijbers.dupas</groupId>
 	<artifactId>Scores</artifactId>
-	<version>1.6.7</version>
+	<version>1.6.8</version>
 	<name>Scores</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>

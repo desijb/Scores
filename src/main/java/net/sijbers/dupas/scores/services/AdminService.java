@@ -161,11 +161,12 @@ public class AdminService {
 	private GameDayEntity getGameDay(LocalDateTime gameDate, SeasonEntity currentSeason) {
 		GameDayEntity retVal = new GameDayEntity();
 		for (GameDayEntity gameDayRecord: gameDayRepository.findBySequenceNotAndSeasonOrderByGamedateAsc(-1,currentSeason)) {
-			if (( gameDate.isAfter(gameDayRecord.getGamedate().minusHours(6)))&&(gameDate.isBefore(gameDayRecord.getGamedate().plusHours(12)))) {
+			LocalDateTime startOfTheGameDay = LocalDateTime.of(gameDayRecord.getGamedate().getYear(), gameDayRecord.getGamedate().getMonthValue(), gameDayRecord.getGamedate().getDayOfMonth(),0,0,0);
+			log.debug("date: {} - {} - {}",startOfTheGameDay,gameDate,startOfTheGameDay.plusDays(1).plusHours(6));
+			if (( gameDate.isAfter(startOfTheGameDay.minusHours(1)))&&(gameDate.isBefore(startOfTheGameDay.plusDays(1).plusHours(6)))) {
 				retVal = gameDayRecord;
 			}
 		}
-		
 		if (retVal.getCreationdate() == null) {
 			retVal.setGamedate(gameDate);
 			retVal.setSeason(currentSeason);
